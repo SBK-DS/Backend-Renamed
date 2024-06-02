@@ -23,6 +23,7 @@ steps:
 - script: |
     source venv/bin/activate
     python manage.py test
+  workingDirectory: $(Build.SourcesDirectory)
   displayName: 'Run tests'
 
 - task: PublishTestResults@2
@@ -34,6 +35,7 @@ steps:
 - script: |
     source venv/bin/activate
     python manage.py collectstatic --noinput
+  workingDirectory: $(Build.SourcesDirectory)/Backend
   displayName: 'Collect static files'
 
 - task: ArchiveFiles@2
