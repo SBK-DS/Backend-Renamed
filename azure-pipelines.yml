@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  pythonVersion: '3.9'  # Adjust the Python version as needed
+  pythonVersion: '3.12'  # Adjust the Python version as needed
 
 steps:
 - task: UsePythonVersion@0
