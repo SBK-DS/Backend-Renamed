@@ -104,7 +104,6 @@ steps:
 - script: |
     python -m venv venv
     source venv/bin/activate
-    export DJANGO_SETTINGS_MODULE=healthcare.settings
     python -m pip install --upgrade pip
     pip install -r Backend/requirements.txt
     pip install pytest pytest-django pytest-cov
@@ -112,6 +111,7 @@ steps:
 
 - script: |
     source venv/bin/activate
+    export DJANGO_SETTINGS_MODULE=healthcare.settings
     mkdir -p Backend/test-results
     pytest --junitxml=Backend/test-results/results.xml Backend/records/tests.py
   displayName: 'Run tests'
@@ -125,6 +125,7 @@ steps:
 
 - script: |
     source venv/bin/activate
+    export DJANGO_SETTINGS_MODULE=healthcare.settings
     python Backend/manage.py collectstatic --noinput
   workingDirectory: $(Build.SourcesDirectory)
   displayName: 'Collect static files'
