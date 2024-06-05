@@ -106,19 +106,21 @@ steps:
     source venv/bin/activate
     python -m pip install --upgrade pip
     pip install -r Backend/requirements.txt
+    pip install pytest pytest-django pytest-cov
   displayName: 'Install dependencies'
 
 - script: |
     source venv/bin/activate
-    python Backend/manage.py test
-  workingDirectory: $(Build.SourcesDirectory)
+    mkdir -p Backend/test-results
+    pytest --junitxml=Backend/test-results/results.xml Backend/records/tests.py
   displayName: 'Run tests'
 
 - task: PublishTestResults@2
   inputs:
     testRunner: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: 'Backend/test-results/results.xml'
     mergeTestResults: true
+  displayName: 'Publish Test Results'
 
 - script: |
     source venv/bin/activate
